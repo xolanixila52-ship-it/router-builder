@@ -1,0 +1,349 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Bedroom Route</title>
+<style>
+:root{--bg:#e8edeb;--ink:#14211f;--teal:#0f6b63;--amber:#f2a007;--red:#b42318;--line:#c5d0cc}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.45 "Segoe UI",system-ui,sans-serif}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 16px;background:var(--ink);color:#fff;font-size:20px}
+.mode{font-size:14px;padding:4px 10px;border-radius:20px}.bd{background:var(--amber);color:#14211f}.nv{background:#5eead4;color:#14211f}
+nav{display:flex;gap:6px;padding:10px 12px;background:#d4ddd9}nav button{flex:1;min-width:0}main{max-width:820px;margin:0 auto;padding:14px}
+button,.btn{font:inherit;font-weight:600;min-height:46px;padding:6px 14px;border:2px solid var(--ink);border-radius:10px;background:#fff;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+button.on,.pri{background:var(--teal);border-color:var(--teal);color:#fff}button.bad{border-color:var(--red);color:var(--red)}button:disabled{opacity:.4}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+label{display:block;margin:10px 0;font-weight:600}input,select{display:block;width:100%;font:inherit;font-weight:400;padding:9px;margin-top:4px;border:2px solid var(--line);border-radius:8px;background:#fff}
+input[type=range]{padding:0}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;margin:10px 0;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.card img{width:84px;height:64px;object-fit:cover;border-radius:8px}.grow{flex:1;min-width:150px}.row{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.empty{padding:16px;border:2px dashed var(--line);border-radius:12px;color:#455}.meta{color:#455;font-size:15px}
+.thumbs{display:flex;gap:8px;flex-wrap:wrap}.thumbs div{position:relative}.thumbs img{width:96px;height:72px;object-fit:cover;border-radius:8px;display:block}.thumbs button{position:absolute;top:2px;right:2px;min-height:28px;padding:0 8px}
+.stage{position:relative;background:#0b1514;border-radius:12px;overflow:hidden}.stage video,.stage>img{width:100%;display:block;max-height:60vh;object-fit:contain}
+.ov{position:absolute;inset:0;pointer-events:none;overflow:hidden}.ov.arm{pointer-events:auto;cursor:crosshair;outline:4px solid var(--amber);outline-offset:-4px}
+.ar{position:absolute;width:0;height:0}.ar svg{position:absolute;left:-60px;top:-60px;width:120px;height:120px;fill:none;stroke:var(--amber);stroke-width:12;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 2px 4px #000);animation:nudge 1s ease-in-out infinite}
+.ar.sel svg{stroke:#5eead4}.ar .c1{animation:fade 1.2s infinite}.ar .c2{animation:fade 1.2s .25s infinite}.ar .c3{animation:fade 1.2s .5s infinite}
+.a-chevrons,.a-target{animation:none!important}.a-target{animation:pulse 1.2s infinite!important}
+@keyframes nudge{50%{transform:translateY(-12px)}}@keyframes fade{0%,100%{opacity:.15}50%{opacity:1}}@keyframes pulse{50%{transform:scale(1.15)}}
+@media(prefers-reduced-motion:reduce){.ar svg,.ar path{animation:none!important}}
+.st{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px;margin:8px 0}.st.sel{border:2px solid var(--teal)}.st .row{margin:4px 0}.st .row>*{flex:1;min-width:90px}
+.scan{position:absolute;left:8px;bottom:8px;background:#000a;color:#fff;padding:4px 10px;border-radius:8px;font-size:15px}
+#toast{position:fixed;left:12px;right:12px;bottom:14px;background:var(--ink);color:#fff;padding:12px 16px;border-radius:10px;display:none;z-index:9}h2{margin:6px 0}
+.cap{position:absolute;left:8px;right:8px;bottom:8px;background:#000c;color:#fff;padding:10px 14px;border-radius:10px;font-size:20px;font-weight:600;text-align:center}h3{margin:16px 0 4px}
+:root{--bg:#000;--ink:#fff7d6;--teal:#facc15;--amber:#facc15;--red:#fb7185;--line:#3a3000}
+html{background:#000}body{background:#000;color:var(--ink);min-height:100vh}
+body::before{content:"";position:fixed;inset:-60px;z-index:-1;background:radial-gradient(600px 420px at 18% 15%,#facc1526,transparent 62%),radial-gradient(700px 520px at 85% 75%,#f59e0b20,transparent 62%),repeating-linear-gradient(0deg,#facc1509 0 1px,transparent 1px 48px),repeating-linear-gradient(90deg,#facc1509 0 1px,transparent 1px 48px);animation:drift 22s linear infinite}
+@keyframes drift{to{transform:translate3d(48px,48px,0)}}
+header{background:linear-gradient(90deg,#000,#1a1400);color:#fff7d6;border-bottom:1px solid #facc1544;box-shadow:0 0 30px #facc1522}
+.brand{font-weight:800;letter-spacing:.14em;background:linear-gradient(100deg,#facc15 20%,#fff7d6 45%,#f59e0b 60%,#facc15 80%) 0 0/250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shine 4s linear infinite}@keyframes shine{to{background-position:-250% 0}}
+.bd,.nv{background:#facc15;color:#000}
+nav{background:#0a0800f2;border-bottom:1px solid #facc1533;overflow-x:auto}nav button{flex:1 0 auto;padding:6px 10px}
+button,.btn{background:#111;border-color:#4a3c00;color:var(--ink);transition:border-color .2s,box-shadow .2s}button:hover,.btn:hover{border-color:#facc15;box-shadow:0 0 14px #facc1566}
+button.on,.pri{position:relative;overflow:hidden;background:linear-gradient(135deg,#facc15,#f59e0b);border-color:transparent;color:#000;box-shadow:0 0 18px #facc1566}
+.pri::after,button.on::after{content:"";position:absolute;top:0;bottom:0;width:40%;left:-60%;background:linear-gradient(100deg,transparent,#fff9,transparent);animation:sw 3s ease-in-out infinite;pointer-events:none}@keyframes sw{60%,100%{left:130%}}
+button.bad{background:#111;border-color:var(--red);color:var(--red)}
+input,select{background:#0c0a00;color:var(--ink);border-color:#3a3000}
+.card,.st{background:#0c0a00;border-color:#3a3000}.st.sel{border-color:#facc15}
+.empty{border-color:#3a3000;color:#c9b458}.meta{color:#c9b458}
+#toast{background:#111;border:1px solid #facc15;color:#fff7d6}
+.stage{background:#000;box-shadow:0 0 0 1px #facc1566,0 0 34px #facc1533}
+.ar{animation:up .35s ease-out;z-index:3}.cap{z-index:1}@keyframes up{from{opacity:0}}
+.ar svg{stroke:#facc15;stroke-width:11;filter:drop-shadow(0 0 8px #facc15)}.ar.sel svg{stroke:#fff}
+.cap{background:linear-gradient(90deg,#000e,#1a1400ee);border:1px solid #facc1599;box-shadow:0 0 18px #facc1566;color:#fff7d6;animation:fin .4s}
+@keyframes fin{from{opacity:0;transform:translateY(10px)}}
+.hud{position:absolute;inset:0;pointer-events:none;overflow:hidden}.hud i{position:absolute;width:30px;height:30px;border:3px solid #facc15;filter:drop-shadow(0 0 6px #facc15)}
+.hud i:nth-child(1){left:10px;top:10px;border-right:0;border-bottom:0}.hud i:nth-child(2){right:10px;top:10px;border-left:0;border-bottom:0}.hud i:nth-child(3){left:10px;bottom:10px;border-right:0;border-top:0}.hud i:nth-child(4){right:10px;bottom:10px;border-left:0;border-top:0}
+.sl{position:absolute;inset:0;background:linear-gradient(180deg,transparent 44%,#facc1588 50%,transparent 56%);animation:sweep 2.2s linear infinite;will-change:transform}@keyframes sweep{from{transform:translateY(-100%)}to{transform:translateY(100%)}}
+.stage.lock .hud i{border-color:#fff;filter:drop-shadow(0 0 10px #facc15)}.stage.lock .sl{display:none}.stage.lock{box-shadow:0 0 0 2px #facc15,0 0 40px #facc1577}
+.stage.unk .hud i{border-color:#fb7185;filter:drop-shadow(0 0 8px #fb7185)}.stage.unk .sl{background:linear-gradient(180deg,transparent 44%,#fb718588 50%,transparent 56%)}
+.big{font-size:21px;margin:12px 0;text-shadow:0 0 12px #facc1588}.big b{color:#facc15}
+.bar{position:relative;height:30px;margin:6px 0;border-radius:8px;background:#0c0a00;border:1px solid #3a3000;overflow:hidden;font-size:14px}.bar b{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#facc1533,#f59e0b66);transition:width .25s}.bar.hold b{background:linear-gradient(90deg,#f59e0b,#facc15);box-shadow:0 0 14px #facc15}.bar.hold span,.bar.hold em{color:#000}
+.bar span,.bar em{position:relative;z-index:1;line-height:28px;padding:0 10px;float:left;font-style:normal}.bar em{float:right;font-weight:700}
+.hero{text-align:center;padding:22px 12px}.hero h2{font-size:34px;margin:8px 0}
+.orb{position:relative;width:96px;height:96px;margin:0 auto;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff7d6,#facc15 45%,#7a5a00 80%,#000);box-shadow:0 0 40px #facc1599,0 0 90px #f59e0b55;animation:orb 3s ease-in-out infinite}@keyframes orb{50%{transform:scale(1.08)}}
+.orb::before,.orb::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #facc15;animation:ring 2.4s ease-out infinite}.orb::after{animation-delay:1.2s}@keyframes ring{from{transform:scale(1);opacity:.7}to{transform:scale(2.3);opacity:0}}
+.pw{text-align:center;letter-spacing:.2em;font-size:12px;text-transform:uppercase}
+.at{position:absolute;top:12px;left:52px;right:52px;text-align:center;padding:8px 12px;border-radius:12px;background:linear-gradient(90deg,#000e,#1a1400ee);border:1px solid #facc15;box-shadow:0 0 18px #facc1588;font-weight:700;animation:fin .4s}.at:empty{display:none}.at b{color:#facc15}.at.unk{border-color:#fb7185;box-shadow:0 0 18px #fb718588}
+.pg{height:6px;border-radius:4px;background:#1a1400;margin:12px 0 8px;overflow:hidden}.pg b{display:block;height:100%;background:linear-gradient(90deg,#f59e0b,#facc15);transition:width .3s}
+.log{background:#050400;border:1px solid #3a3000;border-radius:12px;padding:10px;font:13px/1.6 ui-monospace,Consolas,monospace;color:#c9b458;text-align:left;max-height:170px;overflow:auto}.log div::before{content:"› ";color:#facc15}.log .ok{color:#facc15}.log .er{color:#fb7185}
+.chat{max-height:240px;overflow:auto;margin:8px 0}.m{margin:6px 0;padding:8px 12px;border-radius:12px;max-width:88%;animation:fin .3s}.m.ai{background:#1a1400;border:1px solid #facc1555}.m.me{background:linear-gradient(135deg,#facc15,#f59e0b);color:#000;margin-left:auto}
+.mic.rec{animation:pulse 1s infinite}.ps{min-height:34px;max-width:130px;padding:2px 6px;margin:0 6px}
+body.cam::before,body.cam .brand,body.cam .pri::after,body.cam button.on::after{animation:none}
+@media(prefers-reduced-motion:reduce){body::before,.brand,.sl,.orb,.orb::before,.orb::after,.cap,.pri::after,button.on::after,.m,.mic.rec{animation:none}}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0"></script><script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/mobilenet@2.1.1"></script></head><body><div id="app"></div><div id="toast" role="status"></div>
+<script id="bundled" type="application/json">null</script>
+<script>
+const $=s=>document.querySelector(s),E=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),uid=()=>Math.random().toString(36).slice(2,9);
+let P,PUB=false,V='pt',U={},B={},stream=null,PD=null,RD=null,SEL=-1,ARM=null,NS='straight',LV={},timer=null,PL=[];
+const url=o=>PUB?`media/${o.id}.${o.ext}`:U[o.id],pn=()=>(!P.name||P.name=='My project')?'Bedroom route':P.name,blankP=()=>({name:'Bedroom route',points:[],routes:[],settings:{th:.8}});
+const toast=m=>{const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',5000)};
+/* storage: metadata + blobs in IndexedDB */
+const DB=()=>new Promise((r,j)=>{const q=indexedDB.open('navproject2',1);q.onupgradeneeded=()=>{q.result.createObjectStore('k');q.result.createObjectStore('b')};q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)});
+const rq=q=>new Promise((r,j)=>{q.onsuccess=()=>r(q.result);q.onerror=()=>j(q.error)});
+async function load(){const d=await DB(),g=k=>rq(d.transaction('k').objectStore('k').get(k)),cur=await g('cur');P=cur?await g('proj:'+cur):null;
+ if(!P){P=(await g('p'))||blankP();P.pid=P.pid||uid();const t=d.transaction('k','readwrite').objectStore('k');t.put(P,'proj:'+P.pid);t.put(P.pid,'cur')}
+ for(const k of await rq(d.transaction('b').objectStore('b').getAllKeys())){B[k]=await rq(d.transaction('b').objectStore('b').get(k));U[k]=URL.createObjectURL(B[k])}}
+async function save(){if(PUB||!P||!P.pid)return;try{const d=await DB(),t=d.transaction('k','readwrite').objectStore('k');t.put(P,'proj:'+P.pid);t.put(P.pid,'cur')}catch(e){toast('Save failed: '+e.message)}}
+async function putB(id,b){B[id]=b;U[id]=URL.createObjectURL(b);try{const d=await DB();d.transaction('b','readwrite').objectStore('b').put(b,id)}catch(e){toast('Could not store file: '+e.message)}}
+async function delB(o){if(!o)return;delete B[o.id];delete U[o.id];try{const d=await DB();d.transaction('b','readwrite').objectStore('b').delete(o.id)}catch(e){}}
+const allMedia=()=>P.points.flatMap(p=>p.imgs);
+/* recognition: small on-device image fingerprint (not a trained neural network) */
+const nz=a=>{const m=a.reduce((s,v)=>s+v,0)/a.length,z=a.map(v=>v-m);let n=0;for(const v of z)n+=v*v;n=Math.sqrt(n)||1;return z.map(v=>v/n)};
+function feat(s){const c=document.createElement('canvas');c.width=24;c.height=18;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(s,0,0,24,18);const d=x.getImageData(0,0,24,18).data,g=[],col=[];
+ for(let i=0;i<432;i++)g.push(.3*d[i*4]+.59*d[i*4+1]+.11*d[i*4+2]);
+ for(let gy=0;gy<3;gy++)for(let gx=0;gx<4;gx++){let r=0,q=0,b=0;for(let y=0;y<6;y++)for(let u=0;u<6;u++){const i=((gy*6+y)*24+gx*6+u)*4;r+=d[i];q+=d[i+1];b+=d[i+2]}col.push(r/36,q/36,b/36)}
+ return [...nz(g),...nz(col)].map(v=>+v.toFixed(3))}
+const sim=(a,b,ea,eb)=>{let g=0,c=0;for(let i=0;i<432;i++)g+=a[i]*b[i];for(let i=432;i<468;i++)c+=a[i]*b[i];const fp=.7*g+.3*c;if(!ea||!eb||ea.length!=eb.length)return fp;let d=0;for(let i=0;i<ea.length;i++)d+=ea[i]*eb[i];return .8*d+.2*fp};
+const match=(f,e)=>P.points.filter(p=>p.imgs.length).map(p=>{let bs=-9,bi=0;p.imgs.forEach((o,i)=>{const v=sim(f,o.f,e,o.e);if(v>bs){bs=v;bi=i}});return [p,bs,bi]}).sort((a,b)=>b[1]-a[1]);
+/* arrows */
+const PATH={straight:'<path d="M50 92V22M24 46L50 20L76 46"/>',left:'<path d="M64 92V64Q64 36 30 36M46 20L28 36L46 52"/>',right:'<g transform="translate(100 0) scale(-1 1)"><path d="M64 92V64Q64 36 30 36M46 20L28 36L46 52"/></g>',uturn:'<path d="M28 92V38Q28 12 50 12Q72 12 72 38V70M58 56L72 72L86 56"/>',chevrons:'<path class="c1" d="M22 80L50 58L78 80"/><path class="c2" d="M22 55L50 33L78 55"/><path class="c3" d="M22 30L50 8L78 30"/>',target:'<circle cx="50" cy="50" r="34"/><path d="M34 52L46 64L68 38"/>'};
+const arrowHTML=(a,s)=>`<div class="ar ${s?'sel':''}" style="left:${a.x}%;top:${a.y}%;transform:rotate(${a.rot}deg) scale(${a.size})"><svg viewBox="0 0 100 100" class="a-${a.style}">${PATH[a.style]}</svg></div>`;
+const ovHTML=(o,sel)=>(o.ar||[]).map((a,i)=>arrowHTML(a,i===sel)).join('');
+const capHTML=o=>o.tx?`<div class="cap">${E(o.tx)}</div>`:'';
+/* shell */
+function go(k){stopLive();if(RC)recCancel();PD=ED=null;ARM=null;V=k;if(k=='data'&&!PUB)save().then(plist).then(l=>{PL=l;if(V=='data')render()}).catch(()=>{});render()}
+function render(){
+ const tabs=PUB?[['live','Guide'],['pl','Places'],['vo','Voice']]:[['pt','Points'],['rt','Label'],['live','Live test'],['pl','Places'],['vo','Voice'],['data','Data']];
+ $('#app').innerHTML=`<header><b><span class="brand">${E(pn())}</span> <small style="opacity:.7;font-weight:400;font-size:13px">· powered by DAVID AI</small></b>${!PUB&&PL.length>1?`<select class="ps" onchange="openProject(this.value)">${PL.map(x=>`<option value="${x.pid}" ${x.pid==P.pid?'selected':''}>${E(x.name||'Untitled')}</option>`).join('')}</select>`:''}<span class="mode ${PUB?'nv':'bd'}">${PUB?'Navigation':'Builder'}</span></header>${`<nav>${tabs.map(([k,n])=>`<button class="${V==k?'on':''}" onclick="go('${k}')">${n}</button>`).join('')}</nav>`}<main>${({pt:vPt,rt:vRt,live:vLive,pl:vPlaces,vo:vVoice,data:vData})[V]()}</main>`;
+ document.body.classList.toggle('cam',!!stream||!!RS);const rv=$('#rv');if(rv&&RS){rv.srcObject=RS;rv.play().catch(()=>{})}const v=$('#lv');if(v&&stream){v.srcObject=stream;v.play().catch(()=>{})}
+ if(V=='rt'&&ED)upd();if(V=='live')show();
+}
+/* helpers */
+const KN={start:'Starting points',via:'Ways through (passages)',dest:'Destinations'},KS={start:'Starting point',via:'Way through',dest:'Destination'},KO=['start','via','dest'];
+let LK='start',ED=null,MN=null,busy=false;
+const lab=o=>(o.ar&&o.ar.length)||o.tx;
+const grp=fn=>KO.map(k=>{const l=P.points.filter(p=>p.kind==k);return l.length?`<h3>${KN[k]} (${l.length})</h3>`+l.map(fn).join(''):''}).join('');
+const mig=()=>{P.pid=P.pid||uid();P.settings=P.settings||{};if(PUB)try{const r=localStorage.getItem('navrule'),g=localStorage.getItem('navmg');if(r)P.settings.rule=r;if(g)P.settings.mg=+g}catch(e){};P.routes=P.routes||[];for(const p of P.points)for(const o of p.imgs){o.ar=o.ar||[];o.tx=o.tx||''}for(const r of P.routes){const p=P.points.find(x=>x.id==r.from),o=p&&(p.imgs[r.bg||0]||p.imgs[0]);if(o&&r.arrows&&r.arrows.length&&!o.ar.length)o.ar=r.arrows.map(({style,x,y,rot,size})=>({style,x,y,rot,size}))}P.routes=[];for(const p of P.points){if(p.ar===undefined&&p.tx===undefined){const o=p.imgs.find(o=>(o.ar&&o.ar.length)||o.tx);p.ar=o&&o.ar?o.ar.map(a=>({...a})):[];p.tx=o?o.tx||'':''}p.ar=p.ar||[];p.tx=p.tx||''}};
+/* AI model (MobileNet embeddings) + fingerprint */
+const TAG='v2a1b';let RP=null,PPR=null;
+const ready=()=>RP||(RP=(async()=>{lg('Loading the AI engine…','',5);if(!window.mobilenet||!window.tf){lg('AI engine files did not load. Check your internet. Using basic matching.','er',100);return}
+ try{lg('Downloading the AI model (first time only)…','',20);MN=await mobilenet.load({version:2,alpha:1});lg('AI model downloaded (backend: '+tf.getBackend()+')'+(tf.getBackend()=='cpu'?'. Slow mode: this phone has no usable graphics acceleration.':''),tf.getBackend()=='cpu'?'er':'ok',55);lg('Warming up the AI…','',60);const c=document.createElement('canvas');c.width=c.height=224;await emb(c);await emb(c);lg('AI is ready','ok',70)}catch(e){MN=null;lg('AI model could not load ('+e.message+'). Using basic matching.','er',100)}})());
+async function emb(src){if(!MN)return null;const t=MN.infer(src,true),d=await t.data();t.dispose();return nz(Array.from(d)).map(v=>+v.toFixed(3))}
+async function embAll(im){const w=im.naturalWidth||im.width,h=im.naturalHeight||im.height,x=CV.getContext('2d'),r=[];for(const [a,b,c,d] of [[0,0,1,1],[.15,.15,.7,.7],[0,.1,.7,.8],[.3,.1,.7,.8]]){x.drawImage(im,w*a,h*b,w*c,h*d,0,0,224,224);r.push(await emb(CV))}return r[0]?r:null}
+async function prep(){const td=[];for(const p of P.points)for(const o of p.imgs)if(!o.e||o.m!==TAG)td.push(o);if(!td.length||!MN)return;let n=0;const bad=[];for(const o of td){const im=new Image();im.src=url(o);try{await im.decode();const es=await embAll(im);if(es){o.e=es[0];o.v=es.slice(1);o.m=TAG}else bad.push(url(o))}catch(x){bad.push(url(o))}n++;lg(`Preparing photo ${n} of ${td.length}…`,'',70+25*n/td.length)}
+ if(bad.length)lg(`${bad.length} of ${td.length} photos could not be loaded (first: ${bad[0]}). ${PUB?'Upload the whole media folder next to index.html.':'Re-add those photos.'}`,'er',95);else lg('Photos ready','ok',95);save();cacheSave()}
+const prepP=()=>PPR||(PPR=prep().finally(()=>PPR=null));
+/* points */
+const ptCard=(p,btns)=>`<div class="card"><div class="grow"><b>${E(p.name||'Unnamed')}</b><div class="meta">${KS[p.kind]} · ${p.imgs.length} photos · ${labP(p)?'labelled':'not labelled yet'}</div></div>${btns}<div class="thumbs" style="flex-basis:100%">${p.imgs.map(o=>`<img src="${url(o)}" alt="">`).join('')}</div></div>`;
+function vPt(){
+ if(RC)return vRec();if(PD)return `<h2>Point</h2><label>Name<input value="${E(PD.name)}" oninput="PD.name=this.value;save()" placeholder="Bedroom door"></label>
+ <label>Type<select onchange="PD.kind=this.value;save()">${KO.map(k=>`<option value="${k}" ${PD.kind==k?'selected':''}>${KS[k]}</option>`).join('')}</select></label>
+ <button class="pri" onclick="recStart()">● Record this place</button><label class="btn">Add photos<input type="file" accept="image/*" multiple hidden onchange="addImgs(this)"></label>
+ <p class="meta">Add several photos of this spot (different distance, angle and lighting). More photos make recognition more reliable.</p>
+ <div class="thumbs">${PD.imgs.map((o,i)=>`<div><img src="${url(o)}" alt=""><button class="bad" onclick="rmImg(${i})">×</button></div>`).join('')}</div>
+ <div class="row"><button class="pri" onclick="PD=null;render()">Done</button></div>`;
+ return `<div class="row"><button class="pri" onclick="PD={id:uid(),name:'',kind:'start',imgs:[],ar:[],tx:''};P.points.push(PD);save();render()">Add point</button><button onclick="check()">Check recognition</button><button onclick="newProject()">New project</button></div><div id="chk"></div><p class="meta">Order matters: the AI expects the route to run top to bottom through the starting points, then the ways through, then the destinations. Use the arrows to set the order.</p>`+(P.points.length?grp(p=>ptCard(p,`<button onclick="mv('${p.id}',-1)">↑</button><button onclick="mv('${p.id}',1)">↓</button><button onclick="PD=P.points.find(x=>x.id=='${p.id}');render()">Edit</button><button class="bad" onclick="delPt('${p.id}')">Delete</button>`)):'<p class="empty">No points yet. Add starting points, ways through, and destinations, each with photos. Then use the Label tab.</p>');
+}
+function mv(id,d){const k=P.points.find(x=>x.id==id).kind,ix=P.points.map((x,i)=>x.kind==k?i:-1).filter(i=>i>=0),a=ix.indexOf(P.points.findIndex(x=>x.id==id)),b=ix[a+d];if(b===undefined)return;const t=P.points[ix[a]];P.points[ix[a]]=P.points[b];P.points[b]=t;save();render()}
+async function addImgs(i){for(const f of i.files){try{const bm=await createImageBitmap(f),k=Math.min(1,800/bm.width),c=document.createElement('canvas');c.width=bm.width*k;c.height=bm.height*k;c.getContext('2d').drawImage(bm,0,0,c.width,c.height);
+ const id=uid(),es=await embAll(c);await putB(id,await new Promise(r=>c.toBlob(r,'image/jpeg',.8)));PD.imgs.push({id,ext:'jpg',mime:'image/jpeg',f:feat(c),...(es?{e:es[0],v:es.slice(1),m:TAG}:{}),ar:[],tx:''})}catch(x){toast(f.name+' is not a readable image.')}}save();render()}
+async function rmImg(i){await delB(PD.imgs[i]);PD.imgs.splice(i,1);save();render()}
+async function delPt(id){if(!confirm('Delete this point and its photos?'))return;const p=P.points.find(x=>x.id==id);for(const o of p.imgs)await delB(o);P.points=P.points.filter(x=>x.id!=id);save();render()}
+async function stressEmb(im){const w=im.naturalWidth||im.width||224,h=im.naturalHeight||im.height||224,x=CV.getContext('2d'),o=[];
+ x.drawImage(im,w*.2,h*.1,w*.75,h*.85,0,0,224,224);o.push(await emb(CV));
+ x.drawImage(im,0,0,w,h,0,0,224,224);x.fillStyle='rgba(0,0,0,.45)';x.fillRect(0,0,224,224);o.push(await emb(CV));
+ const t=document.createElement('canvas');t.width=t.height=40;t.getContext('2d').drawImage(im,0,0,40,40);x.drawImage(t,0,0,224,224);o.push(await emb(CV));
+ return o.every(Boolean)?o:null}
+async function chkDel(pid,oid){if(!confirm('Remove this photo from the place?'))return;const p=P.points.find(x=>x.id==pid),i=p.imgs.findIndex(o=>o.id==oid);if(i<0)return;await delB(p.imgs[i]);p.imgs.splice(i,1);save();check()}
+async function check(){const c=$('#chk'),say_=m=>{const e=$('#chk');if(e)e.innerHTML='<p class="meta">'+m+'</p>'};say_('Getting the AI ready…');await ready();await prepP();
+ if(!MN)return say_('The recognition check needs the AI model, which could not load. Check your internet and try again. A check without it would not be accurate.');
+ const B=buildBrain();if(!B)return say_('Every place needs at least one processed photo before the check can run.');
+ const N=B.pl.length,res=B.pl.map(p=>({p,n:0,ok:0,cw:0,conf:{},ph:[],sib:0,unt:0})),m=Math.max(mg(),.1);let done=0;const total=B.use.reduce((a,u)=>a+u.length,0);
+ for(let i=0;i<N;i++){const p=B.pl[i];for(let j=0;j<B.use[i].length;j++){say_(`Stress-testing photo ${++done} of ${total}: dim light, blur and off-centre views…`);await new Promise(r=>setTimeout(r));
+  const o=B.use[i][j],r=res[i],ph={o,n:0,ok:0,wrong:{}},own=B.F[i].filter((f,j2)=>j2!=j&&dot(B.F[i][j][0],f[0])<=.9);
+  if(!own.length){r.unt++;ph.unt=1;r.ph.push(ph);continue}
+  let sq=null;try{const im=new Image();im.src=url(o);try{await im.decode()}catch(e){}sq=await stressEmb(im)}catch(e){}
+  if(!sq){ph.unt=1;r.unt++;r.ph.push(ph);continue}
+  for(const e of sq){const q=B.tr(e),s=B.F.map((g,i2)=>{let b=-9;g.forEach((f2,j2)=>{if(i2==i&&(j2==j||dot(B.F[i][j][0],f2[0])>.9))return;for(const v of f2){const d=dot(q,v);if(d>b)b=d}});return b}),mx=Math.max(B.sU,...s),l=s.map(v=>v>-9?Math.exp((v-mx)/B.T):0);l.push(Math.exp((B.sU-mx)/B.T));const z=l.reduce((a,b)=>a+b,0),po=l.map(v=>v/z),ord=po.map((x,k)=>k).sort((a,b)=>po[b]-po[a]),b=ord[0],lead=po[b]-po[ord[1]];
+   r.n++;ph.n++;if(b==i){r.ok++;ph.ok++}else{const nm=b<N?(B.pl[b].name||'Unnamed'):'Not in project';r.conf[nm]=(r.conf[nm]||0)+1;ph.wrong[nm]=(ph.wrong[nm]||0)+1;if(lead>=m)r.cw++}}
+  r.ph.push(ph)}
+  const fs=B.F[i].map(f=>f[0]);let sims=[];for(let a=0;a<fs.length;a++)for(let b2=a+1;b2<fs.length;b2++)sims.push(dot(fs[a],fs[b2]));sims.sort((a,b)=>a-b);if(sims.length&&sims[sims.length>>1]>.92)res[i].sib=1}
+ const tn=res.reduce((a,r)=>a+r.n,0),tok=res.reduce((a,r)=>a+r.ok,0),cw=res.reduce((a,r)=>a+r.cw,0),rate=tn?tok/tn:0,weak=res.filter(r=>r.n&&r.ok/r.n<.9),unv=res.filter(r=>!r.n),sib=res.filter(r=>r.sib);
+ const why=[];if(B.skipped)why.push(B.skipped+' photo(s) have no AI data and were not tested'+(B.lost.length?' (places with none: '+B.lost.map(E).join(', ')+')':'')+'.');if(!tn)why.push('No photo could be tested. Each place needs at least 2 clearly different frames.');if(tn&&rate<.9)why.push('Only '+Math.round(rate*100)+'% of tests passed (aim for 90% or more).');if(cw)why.push(cw+' test(s) were confidently wrong. That is the kind of mistake a visitor would see.');if(unv.length)why.push('Not testable: '+unv.map(r=>E(r.p.name||'Unnamed')).join(', ')+'. Add more varied frames.');
+ const ok=!why.length;
+ const odd=res.flatMap(r=>r.ph.filter(h=>h.n&&h.ok/h.n<.6).map(h=>({r,h}))).sort((a,b)=>a.h.ok/a.h.n-b.h.ok/b.h.n).slice(0,8);
+ const el=$('#chk');if(!el)return;
+ el.innerHTML=`<h3>Recognition check</h3><div class="card" style="display:block;border-color:${ok?'#facc15':'#fb7185'}"><b>${ok?'✓ Strong. Ready for final testing.':'✗ Not ready yet.'}</b><div class="meta">${tok} of ${tn} stress tests passed (${Math.round(rate*100)}%) · ${cw} confident mistakes · calibration: ${B.acc!=null?B.acc+'% plain match':'n/a'}</div>${why.map(w=>`<div class="meta">• ${w}</div>`).join('')}</div>`+
+ res.map(r=>{const pc=r.n?Math.round(100*r.ok/r.n):null,ic=pc==null?'?':pc>=90?'✓':pc>=70?'⚠':'✗',cf=Object.entries(r.conf).sort((a,b)=>b[1]-a[1]).map(([k,v])=>E(k)+' ('+v+')').join(', ');
+  return `<div class="st"><b>${ic} ${E(r.p.name||'Unnamed')}</b> <span class="meta">${pc==null?'could not be tested':pc+'% ('+r.ok+'/'+r.n+')'} · ${r.p.imgs.length} frames${cf?' · mistaken for: '+cf:''}${r.sib?' · frames are near-identical, so real-world accuracy may be lower':''}${r.unt?' · '+r.unt+' frame(s) untestable':''}</span></div>`}).join('')+
+ (odd.length?'<h3>Odd-one-out photos</h3><p class="meta">These photos fail most of their stress tests and are often mistaken for another place. Removing or retaking them usually helps.</p>'+odd.map(({r,h})=>`<div class="card"><img src="${url(h.o)}" alt=""><div class="grow"><b>${E(r.p.name||'Unnamed')}</b><div class="meta">passed ${h.ok} of ${h.n} · mistaken for ${Object.entries(h.wrong).sort((a,b)=>b[1]-a[1]).map(([k,v])=>E(k)).join(', ')}</div></div><button class="bad" onclick="chkDel('${r.p.id}','${h.o.id}')">Remove photo</button></div>`).join(''):'')+
+ '<p class="meta">How this works: every photo is re-tested as if it were seen in dim light, blurred, and from an off-centre angle, against all your other frames. Frames taken a moment apart count as the same view and are left out, so a photo cannot pass by matching its twin. It still cannot predict a different time of day, moved furniture or a person in view, so test live at each place too.</p>';toast('Check done.')}
+/* record a place: capture good frames automatically */
+let RC=null,RS=null;
+function sharpOf(v){const c=document.createElement('canvas');c.width=96;c.height=72;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(v,0,0,96,72);const d=x.getImageData(0,0,96,72).data,g=new Float32Array(96*72);let m=0;for(let i=0;i<g.length;i++){g[i]=.3*d[i*4]+.59*d[i*4+1]+.11*d[i*4+2];m+=g[i]}m/=g.length;let s=0,n=0;for(let y=1;y<71;y++)for(let X=1;X<95;X++){const i=y*96+X,l=4*g[i]-g[i-1]-g[i+1]-g[i-96]-g[i+96];s+=l*l;n++}return{sh:s/n,br:m}}
+const vRec=()=>`<h2>Recording ${E(PD.name||'this place')}</h2><p class="meta">Face the direction you will walk. Slowly move a little closer, further and side to side for about 8 seconds. Blurry, dark and repeated frames are skipped.</p><div class="stage"><video id="rv" playsinline muted autoplay style="max-height:none"></video><div class="hud"><i></i><i></i><i></i><i></i><div class="sl"></div></div></div><div class="pg"><b id="rpg" style="width:0"></b></div><div id="rct" class="big">0 frames saved</div><div class="row"><button class="pri" onclick="recStop()">Done</button><button onclick="recCancel()">Cancel</button></div>`;
+async function recStart(){if(!PD)return;try{RS=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:640}}})}catch(e){return toast('Camera unavailable ('+e.name+'). Allow camera access and use HTTPS.')}
+ RC={ids:[],feats:[],pend:[],max:0,t0:Date.now(),pt:PD};render();RC.tm=setInterval(recTick,300)}
+function recTick(){const v=$('#rv');if(!RC||!v||!v.videoWidth)return;const el=(Date.now()-RC.t0)/1000,q=sharpOf(v);RC.max=Math.max(RC.max,q.sh);
+ if(q.br>25&&q.br<235&&q.sh>=.6*RC.max&&RC.ids.length<10){const c=document.createElement('canvas'),k=Math.min(1,800/v.videoWidth);c.width=v.videoWidth*k;c.height=v.videoHeight*k;c.getContext('2d').drawImage(v,0,0,c.width,c.height);const f=feat(c);
+  if(!RC.feats.some(o=>sim(o,f)>.97)){RC.feats.push(f);const id=uid(),pt=RC.pt;RC.ids.push(id);RC.pend.push((async()=>{const b=await new Promise(r=>c.toBlob(r,'image/jpeg',.8));await putB(id,b);pt.imgs.push({id,ext:'jpg',mime:'image/jpeg',f,ar:[],tx:''})})())}}
+ const n=RC.ids.length,ct=$('#rct'),pg=$('#rpg');if(ct)ct.textContent=n+' frames saved'+(el>4&&n<3?' · move the phone a little':'');if(pg)pg.style.width=Math.min(100,el/10*100)+'%';if(n>=10||el>=12)recStop()}
+async function recStop(){if(!RC)return;clearInterval(RC.tm);if(RS)RS.getTracks().forEach(t=>t.stop());const r=RC;RC=null;RS=null;await Promise.all(r.pend);save();render();toast(r.ids.length+' frames added to '+(r.pt.name||'this place'));prepP()}
+async function recCancel(){if(!RC)return;clearInterval(RC.tm);if(RS)RS.getTracks().forEach(t=>t.stop());const r=RC;RC=null;RS=null;await Promise.all(r.pend);for(const id of r.ids){const i=r.pt.imgs.findIndex(o=>o.id==id);if(i>=0){await delB(r.pt.imgs[i]);r.pt.imgs.splice(i,1)}}save();render()}
+/* label: one arrow + one sentence per place, shared by every frame */
+const pt=()=>P.points.find(x=>x.id==ED.p),cur=()=>pt().imgs[ED.i]||pt().imgs[0];
+const labP=p=>(p.ar&&p.ar.length)||p.tx;
+const prog=k=>{const l=P.points.filter(p=>p.kind==k&&p.imgs.length);return l.filter(labP).length+'/'+l.length};
+function vRt(){
+ if(!P.points.some(p=>p.imgs.length))return '<p class="empty">Add places and record or add photos in the Points tab first.</p>';
+ if(ED){const p=pt(),o=cur(),d=p.kind=='dest';
+  return `<h2>${E(p.name||'Unnamed')}</h2><p class="meta">${KS[p.kind]} · ${p.imgs.length} frames. Everything you set here is shared by all frames of this place.</p>
+ <div class="stage"><img id="ev" src="${url(o)}" alt=""><div id="ov" class="ov ${ARM!==null?'arm':''}" onclick="place(event)"></div></div>
+ ${p.imgs.length>1?`<div class="thumbs">${p.imgs.map((x,i)=>`<div><img src="${url(x)}" alt="" onclick="ED.i=${i};render()" style="cursor:pointer;${i==ED.i?'outline:4px solid var(--teal)':''}"></div>`).join('')}</div><p class="meta">Tap a frame to place the arrow on it. The arrow applies to every frame.</p>`:''}
+ ${d?'<p class="meta">Destination: add a sentence only.</p>':`<p class="meta">${ARM!==null?'Tap the picture where the arrow should go.':'Choose a style, then tap Place arrow.'}</p>
+ <div class="row"><select onchange="NS=this.value" style="flex:1">${Object.keys(PATH).map(k=>`<option ${k==NS?'selected':''}>${k}</option>`).join('')}</select><button class="pri" onclick="ARM='new';render()">Place arrow</button></div><div id="al">${rowsHTML()}</div>`}
+ <label>Sentence for this place (spoken once, shown on screen)<input value="${E(p.tx||'')}" oninput="pt().tx=this.value;save();upd()" placeholder="Walk straight, then turn left at the passage"></label>
+ <div class="row"><button onclick="ED=null;ARM=null;render()">All places</button><button class="pri" onclick="nextImg()">Save &amp; next place</button></div>`}
+ return `<div class="row">${KO.map((k,n)=>`<button class="${LK==k?'on':''}" style="flex:1" onclick="LK='${k}';render()">${n+1}. ${KS[k]} ${prog(k)}</button>`).join('')}</div>
+ <p class="meta">Do the starting points first, then the ways through, then the destinations.${LK=='dest'?' Destinations only need a sentence.':' Each place gets one arrow and one sentence, shared by all its frames.'}</p>`+
+ (P.points.filter(p=>p.kind==LK).map(p=>`<div class="card"><div class="grow"><b>${E(p.name||'Unnamed')}</b><div class="meta">${p.imgs.length} frames · ${labP(p)?'labelled':'not labelled yet'}</div></div><button onclick="PD=P.points.find(x=>x.id=='${p.id}');V='pt';recStart()">Record</button>${p.imgs.length?`<button class="pri" onclick="ED={p:'${p.id}',i:0};SEL=-1;render()">Label</button>`:''}<div class="thumbs" style="flex-basis:100%">${p.imgs.map(o=>`<img src="${url(o)}" alt="" style="outline:${labP(p)?'3px solid var(--teal)':'3px dashed var(--amber)'}">`).join('')||'<span class="meta">No frames yet. Record or add photos.</span>'}</div></div>`).join('')||`<p class="empty">No ${KN[LK].toLowerCase()} yet. Add them in the Points tab.</p>`);
+}
+function nextImg(){const L=KO.flatMap(k=>P.points.filter(p=>p.kind==k&&p.imgs.length).map(p=>({p:p.id,k}))),n=L.findIndex(x=>x.p==ED.p)+1;ARM=null;SEL=-1;if(L[n]){ED={p:L[n].p,i:0};LK=L[n].k}else{ED=null;toast('Every place is done. Try Live test.')}render()}
+const rowsHTML=()=>pt().ar.map((a,i)=>`<div class="st ${i==SEL?'sel':''}"><div class="row"><select onchange="pt().ar[${i}].style=this.value;SEL=${i};save();upd()">${Object.keys(PATH).map(k=>`<option ${k==a.style?'selected':''}>${k}</option>`).join('')}</select><button onclick="SEL=${i};upd();ral()">Show</button><button onclick="SEL=${i};ARM=${i};render()">Move</button><button class="bad" onclick="pt().ar.splice(${i},1);SEL=-1;save();upd();ral()">Delete</button></div>
+ <label>Rotate <input type="range" min="-180" max="180" value="${a.rot}" oninput="pt().ar[${i}].rot=+this.value;SEL=${i};save();upd()"></label><label>Size <input type="range" min="40" max="250" value="${a.size*100}" oninput="pt().ar[${i}].size=this.value/100;SEL=${i};save();upd()"></label></div>`).join('')||'<p class="empty">No arrow yet.</p>';
+const ral=()=>{const e=$('#al');if(e)e.innerHTML=rowsHTML()};
+function upd(){const o=$('#ov');if(o&&ED){const p=pt();o.innerHTML=(p.kind=='dest'?'':ovHTML(p,SEL))+capHTML(p)}}
+function place(ev){if(ARM===null)return;const r=ev.currentTarget.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width*100,y=(ev.clientY-r.top)/r.height*100,o=pt();
+ if(ARM==='new'){o.ar.push({style:NS,x,y,rot:0,size:1});SEL=o.ar.length-1}else Object.assign(o.ar[ARM],{x,y});ARM=null;save();render()}
+/* live: AI scoring. Every photo gets a smoothed score; an image holds the screen until another beats it by the margin */
+const rule=()=>P.settings.rule==='top'?'top':'margin',mg=()=>rule()==='top'?.01:(P.settings.mg||.10),dot=(a,b)=>{let d=0;for(let k=0;k<a.length;k++)d+=a[k]*b[k];return d};
+
+async function startLive(){LOAD=1;render();try{await ready();await prepP();await devCheck();if(!MN)lg('Running without the AI model (basic matching only).','er');lg('Starting the camera…','',96);
+ const cen={};for(const p of P.points){const es=p.imgs.filter(o=>o.m===TAG).map(o=>o.e).filter(Boolean);if(es.length){const m=new Array(es[0].length).fill(0);es.forEach(e=>e.forEach((v,k)=>m[k]+=v));cen[p.id]=nz(m)}}
+ lg('Building the recognition brain…','',97);const brain=buildBrain();if(brain){lg('Brain ready: '+brain.pl.length+' places, '+brain.use.reduce((a,u)=>a+u.length,0)+' frames'+(brain.acc!=null?', self-test '+brain.acc+'% of your frames matched their own place ('+brain.q+' tested)':''),'ok',98);if(brain.skipped)lg(brain.skipped+' photo(s) have no AI data and are ignored'+(brain.lost.length?'. These places cannot be recognised: '+brain.lost.join(', '):'')+'.','er',98)}else lg(MN?'No photo has AI data, so the brain could not start. Using basic matching (much weaker).':'AI model not loaded. Using basic matching (much weaker).','er',98);
+ stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:480}}});lg('Camera is on. Looking for known places.','ok',100);LV={S:{},U:{},hold:null,cen,lastOk:Date.now(),un:0,B:brain};LOAD=0;render();loop()}catch(e){LOAD=0;DG.cam='error: '+e.name;lg('Camera unavailable ('+e.name+'). Allow camera access and use HTTPS.','er');render()}}
+function stopLive(){clearInterval(timer);if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;LV={}}
+/* the recognition brain: centred embeddings + calibrated likelihoods + route-aware Bayesian filter */
+function buildBrain(){
+ if(!MN)return null;const ok=o=>o.e&&o.m===TAG,pl=KO.flatMap(k=>P.points.filter(p=>p.kind==k&&p.imgs.some(ok)));
+ if(!pl.length)return null;const use=pl.map(p=>p.imgs.filter(ok)),skipped=P.points.reduce((a,p)=>a+p.imgs.filter(o=>!ok(o)).length,0),lost=P.points.filter(p=>p.imgs.length&&!p.imgs.some(ok)).map(p=>p.name||'Unnamed');
+ const all=use.flat().map(o=>o.e),n=all.length,D=all[0].length,mu=new Float32Array(D),sg=new Float32Array(D).fill(1);
+ if(n>=3)all.forEach(e=>{for(let d=0;d<D;d++)mu[d]+=e[d]/n});
+ if(n>=8){let m2=0;for(let d=0;d<D;d++){let v=0;all.forEach(e=>{const x=e[d]-mu[d];v+=x*x});sg[d]=v/n;m2+=sg[d]/D}for(let d=0;d<D;d++)sg[d]=Math.sqrt(sg[d]+.5*m2)||1}
+ const tr=e=>{const t=new Float32Array(D);let s=0;for(let d=0;d<D;d++){t[d]=(e[d]-mu[d])/sg[d];s+=t[d]*t[d]}s=Math.sqrt(s)||1;for(let d=0;d<D;d++)t[d]/=s;return t};
+ const F=use.map(u=>u.map(o=>[o.e,...(o.v||[])].map(tr))),N=pl.length,Q=[],X=[];
+ F.forEach((fs,i)=>fs.forEach((fr,j)=>{const q=fr[0],qs=[fr[0],fr[1]||fr[0]],s=F.map((g,i2)=>{let b=-9;g.forEach((f2,j2)=>{if(i2==i&&(j2==j||dot(q,f2[0])>.9))return;for(const v of f2)for(const x of qs){const d=dot(x,v);if(d>b)b=d}});return b});
+  if(s[i]>-9)Q.push({s,i});const o=s.filter((v,k)=>k!=i&&v>-9);if(o.length)X.push(Math.max(...o))}));
+ let T=.06,acc=null;
+ if(Q.length>=2){let bl=-1e9;for(const t of [.02,.03,.04,.06,.08,.12,.2]){let ll=0;for(const q of Q){const mx=Math.max(...q.s),z=q.s.reduce((a,v)=>a+(v>-9?Math.exp((v-mx)/t):0),0);ll+=Math.log(Math.max(1e-6,Math.exp((q.s[q.i]-mx)/t)/z))}if(ll>bl){bl=ll;T=t}}
+  acc=Math.round(100*Q.filter(q=>q.s.indexOf(Math.max(...q.s))==q.i).length/Q.length)}
+ T=Math.max(.05,T*1.3);
+ X.sort((a,b)=>a-b);const oQ=Q.map(q=>q.s[q.i]).sort((x,y)=>x-y),sU=Math.min((X.length?X[Math.floor((X.length-1)*.9)]:.3)+.03,oQ.length?.6*oQ[oQ.length>>1]:9),A=[];
+ for(let a=0;a<=N;a++){const r=new Array(N+1).fill(0);
+  if(a==N){r[N]=.85;const w=pl.map(p=>p.kind=='start'?3:1),sw=w.reduce((x,y)=>x+y,0);w.forEach((x,i)=>r[i]=.15*x/sw)}
+  else{r[a]=.91;r[N]=.01;const nx=a+1<N?a+1:-1;let rest=.08;if(nx>=0){r[nx]=.05;rest=.03}const ot=[];for(let c=0;c<N;c++)if(c!=a&&c!=nx)ot.push(c);if(ot.length)ot.forEach(c=>r[c]+=rest/ot.length);else r[a]+=rest}
+  A.push(r)}
+ const w0=pl.map(p=>p.kind=='start'?3:1).concat([1]),z0=w0.reduce((x,y)=>x+y,0),b0=w0.map(x=>x/z0);
+ return{pl,use,skipped,lost,F,tr,T,sU,A,b:b0.slice(),b0,acc,q:Q.length}}
+function brainStep(B,es){const q=es.map(B.tr),N=B.pl.length,s=B.F.map(fs=>{let b=-9;for(const fr of fs)for(const v of fr)for(const x of q){const d=dot(x,v);if(d>b)b=d}return b}),mx=Math.max(B.sU,...s),l=s.map(v=>Math.exp((v-mx)/B.T));l.push(Math.exp((B.sU-mx)/B.T));for(let i=0;i<l.length;i++)l[i]=.95*l[i]+.05;
+ const pr=new Array(N+1).fill(0);for(let a=0;a<=N;a++)for(let c=0;c<=N;c++)pr[c]+=B.b[a]*B.A[a][c];let z=0;const po=pr.map((v,i)=>{const w=v*l[i];z+=w;return w});return po.map(v=>v/z)}
+function decide(B,po,m){const N=B.pl.length,ord=po.map((x,i)=>i).sort((a,c)=>po[c]-po[a]),b=ord[0],lead=po[b]-po[ord[1]];return{b,lead,idf:b<N&&lead>=m}}
+
+const CV=document.createElement('canvas');CV.width=CV.height=224;
+async function emv(v,crop){if(!MN)return null;const w=v.videoWidth,h=v.videoHeight,x=CV.getContext('2d');crop?x.drawImage(v,w*.15,h*.15,w*.7,h*.7,0,0,224,224):x.drawImage(v,0,0,224,224);return emb(CV)}
+function rank(f,es){const it=[];for(const p of P.points)p.imgs.forEach((o,i)=>{const fp=sim(f,o.f);let r=fp,u=fp;if(es.length&&o.e&&o.m===TAG){const refs=[o.e,...(o.v||[])],own=Math.max(...es.flatMap(e=>refs.map(q=>dot(e,q)))),c=LV.cen[p.id]?Math.max(...es.map(e=>dot(e,LV.cen[p.id]))):own;r=.55*own+.25*c+.2*fp;u=.8*own+.2*fp}it.push({k:p.id+':'+i,p,i,r,u})});return it}
+const lead=(it,key)=>{const a=[...it].sort((x,y)=>y[key]-x[key]),b=a[0],o=a.find(x=>x.p.id!=b.p.id);return o?b[key]-o[key]:1};
+function loop(){if(stream&&!LV.done)scan().finally(()=>{timer=setTimeout(loop,40)})}
+async function scan(){if(busy){if(Date.now()-LV.bt>4000)busy=false;else return}const v=$('#lv');if(!v||!v.videoWidth||!LV.S)return;busy=true;LV.bt=Date.now();const t0=performance.now();LV.f=(LV.f||0)+1;
+ try{const f=feat(v),es=[],e0=await emv(v);if(e0)es.push(e0);const B=LV.B,now=Date.now(),m=mg(),top=rule()=='top';let idf=false,info='',bars='';
+ if(B){let po=brainStep(B,es),d=decide(B,po,m);if(!d.idf){const e1=await emv(v,1);if(e1){es.push(e1);po=brainStep(B,es);d=decide(B,po,m)}}
+  B.b=po;idf=d.idf;if(idf)LV.hold=B.pl[d.b].id+':0';
+  const N=B.pl.length,nm=i=>i<N?(B.pl[i].name||'?'):'Not in project',ord=po.map((x,i)=>i).sort((a,c)=>po[c]-po[a]),last=LASTP?B.pl.findIndex(p=>p.id==LASTP):-1,nx=last>=0&&last+1<N?B.pl[last+1].name:'';
+  info=`confidence ${Math.round(po[d.b]*100)}% · lead ${Math.round(d.lead*100)}%${last>=0?' · last place: '+E(B.pl[last].name)+(nx?' · expected next: '+E(nx):''):''}`;
+  bars=ord.slice(0,4).map(i=>`<div class="bar ${i<N&&B.pl[i].id+':0'==LV.hold?'hold':''}"><span>${E(nm(i))}</span><em>${Math.round(po[i]*100)}%</em><b style="width:${Math.max(2,po[i]*100)}%"></b></div>`).join('')}
+ else{let it=rank(f,es);if(MN&&it.length&&lead(it,'r')<m&&(!LV.hold||LV.f%3==0)){const e1=await emv(v,1);if(e1){es.push(e1);it=rank(f,es)}}
+  for(const x of it){const S=LV.S,U=LV.U;S[x.k]=S[x.k]===undefined?x.r:.25*S[x.k]+.75*x.r;U[x.k]=U[x.k]===undefined?x.u:.25*U[x.k]+.75*x.u;x.s=S[x.k];x.us=U[x.k]}
+  if(!it.length)return;const ss=[...it].sort((a,b)=>b.s-a.s),rs=[...it].sort((a,b)=>b.r-a.r),rl=lead(it,'r'),sl=lead(it,'s'),sb=ss[0],rb=rs[0],ub=Math.max(...it.map(x=>x.u)),cp=LV.hold&&LV.hold.split(':')[0],single=new Set(it.map(x=>x.p.id)).size<2;
+  if(single){idf=ub>=.35;if(idf)LV.hold=sb.k}else if(!top&&rl>=m){idf=true;LV.hold=rb.k}else if(sl>=m){idf=true;LV.hold=sb.k}else if(cp&&sb.p.id==cp)LV.hold=sb.k;
+  info='lead '+Math.round(sl*100)+'% (basic matching)';bars=ss.slice(0,4).map(x=>`<div class="bar ${x.k==LV.hold?'hold':''}"><span>${E(x.p.name||'?')} · photo ${x.i+1}</span><em>${Math.round(Math.max(0,x.s)*100)}%</em><b style="width:${Math.max(2,Math.min(100,x.s*100))}%"></b></div>`).join('')}
+ if(idf){LV.lastOk=now;LV.un=0;const hp=LV.hold&&P.points.find(x=>x.id==LV.hold.split(':')[0]);if(hp&&hp.kind=='dest'&&(!VT||VT==hp.id))LV.done=1}else if(now-LV.lastOk>=5000&&!LV.un){LV.un=1;LV.hold=null}
+ DG.ms=Math.round((DG.ms||0)*.8+(performance.now()-t0)*.2);DG.cam=v.videoWidth+'×'+v.videoHeight;if(LV.f%8==0)drawDg();const sc=$('#sc');if(sc)sc.innerHTML=`<div class="meta">${idf?'Place identified':'Not identified for '+((now-LV.lastOk)/1000).toFixed(1)+'s (says “not part of project” at 5s)'} · ${info} · rule: ${top?'just above the rest':Math.round(m*100)+'% above the rest'}</div>`+bars;
+ show();if(LV.done){const ag=$('#ag');if(ag)ag.innerHTML='<div class="row"><button class="pri" onclick="again()">Start again</button></div>'}}catch(e){const sc=$('#sc');if(sc)sc.innerHTML='<div class="meta" style="color:#fb7185">Recognition error: '+E(e.message)+'</div>'}finally{busy=false}}
+
+/* log, voice, unknown place */
+let PGV=0,LOAD=0,LG=[],CH=[],VT=null,LASTP=null,REC=null;
+const logHTML=()=>LG.map(x=>`<div class="${x[1]}">${E(x[0])}</div>`).join('');
+const lg=(m,c='',p)=>{if(LG.length&&m.startsWith('Preparing photo')&&LG[LG.length-1][0].startsWith('Preparing photo'))LG.pop();LG.push([m,c]);if(p!=null)PGV=p;const l=$('#log');if(l){l.innerHTML=logHTML();l.scrollTop=1e9}const g=$('#pgb');if(g)g.style.width=PGV+'%'};
+const say=t=>{if(P.settings.voice===false||!window.speechSynthesis)return;try{speechSynthesis.cancel();speechSynthesis.speak(new SpeechSynthesisUtterance(t))}catch(e){}};
+const unkHTML=()=>`This place is not part of <b>${E(pn())}</b>. I don't recognise it from any photo in this route.`;
+const tgHTML=()=>{const t=VT&&P.points.find(p=>p.id==VT);return t?`<p class="meta">Heading to <b>${E(t.name)}</b> <button onclick="VT=null;drawTg()" style="min-height:32px">Cancel</button></p>`:''};
+const drawTg=()=>{const e=$('#tgb');if(e)e.innerHTML=tgHTML()};
+function calib(){if(P.settings.uk!=null)return P.settings.uk>0?P.settings.uk:-1;if(!MN)return -1;const ng=[];
+ for(const p of P.points)p.imgs.forEach(o=>{if(!o.e||o.m!==TAG)return;let b=-9;for(const q of P.points){if(q===p)continue;for(const r of q.imgs){if(!r.e||r.m!==TAG)continue;const v=.8*Math.max(...[r.e,...(r.v||[])].map(z=>dot(o.e,z)))+.2*sim(o.f,r.f);if(v>b)b=v}}if(b>-9)ng.push(b)});
+ if(ng.length<2)return .2;ng.sort((a,b)=>a-b);return Math.min(.3,Math.max(.12,ng[Math.floor(ng.length*.75)]))}
+/* assistant */
+const norm=s=>String(s).toLowerCase().replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+function findPt(q){const n=norm(q),w=n.split(' ');let b=null;for(const p of P.points){const m=norm(p.name||'');if(m&&n.includes(m)&&(!b||m.length>norm(b.name).length))b=p}if(b)return b;return P.points.find(p=>norm(p.name||'').split(' ').some(x=>x.length>2&&w.includes(x)))||null}
+function reply(q){const n=norm(q),cp=LASTP&&P.points.find(p=>p.id==LASTP),tx=cp&&cp.tx||'',names=P.points.map(p=>p.name||'Unnamed').join(', ');
+ if(/^(stop|cancel|never mind)/.test(n)){VT=null;drawTg();return 'Okay, I stopped guiding you.'}
+ if(/take me|go to|navigate|guide me|find|where is|how do i get|how to get/.test(n)){const t=findPt(q);if(!t)return 'I do not know that place. I know: '+(names||'nothing yet')+'.';if(cp&&cp.id==t.id)return `You are already at ${t.name}.`;VT=t.id;drawTg();return `Okay, heading to ${t.name}. Keep the camera on in the Guide and I will tell you what to do at each place I recognise.`}
+ if(/where am i|where are we|which place|what place/.test(n))return cp?`You are at ${cp.name}.`:'I can not see a place I know right now. Open the Guide, start the camera and look around.';
+ if(/next|which way|directions|what now|repeat|what do i do/.test(n))return cp?(tx?`At ${cp.name}: ${tx}`:`You are at ${cp.name}. This photo has no written instruction.`):'I do not know where you are yet. Start the camera on the Guide page.';
+ if(/list|places|what can/.test(n))return P.points.length?'I know these places: '+names+'.':'No places have been added yet.';
+ return 'Sorry, I did not understand. Try: where am I, what is next, take me to a place, or list the places.'}
+function ask(t){t=String(t||'').trim();if(!t)return;CH.push({w:'me',t});const r=reply(t);CH.push({w:'ai',t:r});drawChat();say(r)}
+const drawChat=()=>{const c=$('#chat');if(c){c.innerHTML=CH.map(m=>`<div class="m ${m.w}">${E(m.t)}</div>`).join('');c.scrollTop=1e9}};
+function listen(){const SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR)return toast('Listening is not supported in this browser. Type your question instead.');if(REC){REC.stop();return}try{speechSynthesis.cancel()}catch(e){}REC=new SR();REC.lang=navigator.language||'en-US';REC.onresult=e=>ask(e.results[0][0].transcript);REC.onerror=e=>toast('Microphone: '+e.error);REC.onend=()=>{REC=null;const b=$('.mic');if(b)b.classList.remove('rec')};const b=$('.mic');if(b)b.classList.add('rec');try{REC.start()}catch(e){REC=null}}
+const vAssist=()=>`<div class="card" style="display:block"><b>Ask the AI</b><div id="chat" class="chat">${CH.map(m=>`<div class="m ${m.w}">${E(m.t)}</div>`).join('')}</div><div class="row"><button class="pri mic" onclick="listen()">🎙 Speak</button><input id="qi" placeholder="Where am I? Take me to…" style="flex:1;min-width:140px;margin:0" onkeydown="if(event.key=='Enter'){ask(this.value);this.value=''}"><button onclick="const i=$('#qi');ask(i.value);i.value=''">Ask</button></div><div class="row">${['Where am I','What is next','List the places'].map(q=>`<button onclick="ask('${q}')">${q}</button>`).join('')}</div></div>`;
+function vVoice(){const cp=LASTP&&P.points.find(p=>p.id==LASTP);return `<h2>Voice assistant</h2><p class="meta">Talk to the AI or type. It tells you where you are, what to do next, and guides you to a place. ${cp?'Last place seen: <b>'+E(cp.name)+'</b>.':'Start the camera on the Guide page so it can see where you are.'}</p>${vAssist()}<div class="row"><button onclick="P.settings.voice=P.settings.voice===false;save();render()">Spoken replies: ${P.settings.voice===false?'Off':'On'}</button></div>`}
+function setVT(id){VT=id;const p=P.points.find(x=>x.id==id);V='live';render();say(`Okay, heading to ${p.name}. Start the camera and I will tell you the directions.`)}
+function vPlaces(){return `<h2>Places</h2><p class="meta">Every place in ${E(pn())}. Tap "Take me here" and the AI will guide you.</p>`+(P.points.length?grp(p=>`<div class="card"><div class="grow"><b>${E(p.name||'Unnamed')}</b><div class="meta">${KS[p.kind]}</div>${p.tx?`<div class="meta">• ${E(p.tx)}</div>`:''}</div><button class="pri" onclick="setVT('${p.id}')">Take me here</button><div class="thumbs" style="flex-basis:100%">${p.imgs.map(o=>`<img src="${url(o)}" alt="">`).join('')}</div></div>`):'<p class="empty">No places yet.</p>')}
+function paint(k){const o=$('#lvo'),st=$('#lst'),at=$('#at');if(!o)return;const pid=k.split(':')[0],p=P.points.find(x=>x.id==pid);if(!p)return;o.innerHTML=(p.kind=='dest'?'':ovHTML(p,-1))+capHTML(p);const t=(p.kind=='dest'?'Destination reached':'You are at')+': <b>'+E(p.name)+'</b>';if(at){at.className='at';at.innerHTML=t}if(st)st.innerHTML=t;LV.notice='';
+ if(LV.said!==p.id){LV.said=p.id;let sp=p.tx||((p.kind=='dest'?'You have arrived at ':'You are at ')+p.name);if(VT&&p.id==VT){VT=null;drawTg();if(!p.tx)sp='You have arrived at '+p.name}say(sp)}LASTP=p.id}
+function again(){if(LV.B)LV.B.b=LV.B.b0.slice();LV.done=0;LV.hold=null;LV.shown=undefined;LV.S={};LV.U={};LV.un=0;LV.lastOk=Date.now();LV.said=null;LV.notice='Go back to the starting position, then walk the route again.';VT=null;drawTg();const ag=$('#ag');if(ag)ag.innerHTML='';say(LV.notice);show();loop()}
+function show(){const o=$('#lvo'),st=$('#lst'),sg=$('#stg'),at=$('#at');if(!o)return;const k=LV.hold,kk=k||(LV.un?'?':'');if(sg){sg.classList.toggle('lock',!!k);sg.classList.toggle('unk',!k&&!!LV.un)}if(LV.shown===kk&&o.dataset.k===kk)return;const prev=LV.shown;LV.shown=kk;o.dataset.k=kk;clearTimeout(LV.sw);
+ const clr=m=>{o.innerHTML='';if(at){at.className='at';at.innerHTML=''}if(st)st.innerHTML=m};
+ if(!kk){clr(LV.notice||'Scanning for a known place…');return}
+ if(kk=='?'){LV.said=null;clr('');o.innerHTML='';const t=unkHTML();if(at){at.className='at unk';at.innerHTML=t}if(st)st.innerHTML=t;say('This place is not part of '+pn()+'. I do not recognise it.');return}
+ const pp=x=>x&&x!='?'?x.split(':')[0]:'';if(pp(prev)&&pp(prev)!=pp(kk)){clr('Scanning for a known place…');LV.sw=setTimeout(()=>{if(LV.shown&&LV.shown!='?')paint(LV.shown)},100)}else paint(kk)}
+const setRule=r=>{P.settings.rule=r;if(PUB)try{localStorage.setItem('navrule',r)}catch(e){};save();render()};
+const setMg=v=>{P.settings.mg=v/100;if(PUB)try{localStorage.setItem('navmg',String(v/100))}catch(e){};save();render()};
+const ruleUI=()=>`<div class="card" style="display:block"><b>How a place is picked</b><div class="row"><button class="${rule()=='margin'?'on':''}" onclick="setRule('margin')">${Math.round((P.settings.mg||.1)*100)}% above the rest</button><button class="${rule()=='top'?'on':''}" onclick="setRule('top')">Just above the rest</button></div>${rule()=='margin'?`<label>Margin: ${Math.round(mg()*100)}%<input type="range" min="5" max="30" value="${Math.round(mg()*100)}" onchange="setMg(this.value)"></label>`:''}<p class="meta">${rule()=='margin'?'A place shows the moment its score is that much or more above every other place.':'The top-scoring place shows the moment it is above the rest, by any amount.'} If nothing can be identified for 5 seconds, it says the place is not part of the project.</p></div>`;
+function vLive(){
+ if(!P.points.some(labP))return `<p class="empty">${PUB?'This guide is empty.':'Add points with photos, then label them in the Label tab first.'}</p>`;
+ return stream?`<div class="stage" id="stg"><video id="lv" playsinline muted autoplay style="max-height:none"></video><div id="lvo" class="ov"></div><div id="at" class="at"></div><div class="hud"><i></i><i></i><i></i><i></i><div class="sl"></div></div></div><div id="tgb">${tgHTML()}</div><div id="lst" class="big">Scanning for a known place…</div><div id="ag"></div><div id="sc"></div>${ruleUI()}${vAssist()}
+ <div class="row"><button onclick="stopLive();render()">Stop camera</button><button onclick="P.settings.voice=P.settings.voice===false;save();render()">Voice: ${P.settings.voice===false?'Off':'On'}</button></div><details><summary class="meta">Diagnostics (screenshot this if something fails)</summary><div id="dg" class="log">${diagHTML()}</div></details><p class="meta pw">Powered by DAVID AI</p>`
+ :`<div class="hero"><div class="orb"></div><h2 class="brand">${E(pn())}</h2><p class="meta">Move around with the camera. The AI scores every photo you labelled, shows the arrows and wording of the place it picks, and tells you the directions out loud. If it cannot identify a place for 5 seconds, it says the place is not part of this project.</p><div id="tgb">${tgHTML()}</div>${ruleUI()}<button class="pri" onclick="startLive()" ${LOAD?'disabled':''}>${LOAD?'Starting…':'Start camera'}</button>${LG.length?`<div class="pg"><b id="pgb" style="width:${PGV}%"></b></div><div id="log" class="log">${logHTML()}</div>`:''}<details><summary class="meta">Diagnostics (screenshot this if something fails)</summary><div id="dg" class="log">${diagHTML()}</div></details><p class="meta pw">Powered by DAVID AI</p></div>`}
+/* data */
+function vData(){return `<h2>My projects</h2><p class="meta">Every project is kept in this browser. Open one to continue working on it.</p>${PL.map(x=>`<div class="card"><div class="grow"><b>${E(x.name||'Untitled')}</b><div class="meta">${x.pts} points · ${x.ph} photos${x.pid==P.pid?' · open now':''}</div></div>${x.pid==P.pid?'':`<button class="pri" onclick="openProject('${x.pid}')">Open</button>`}<button class="bad" onclick="delProject('${x.pid}')">Delete</button></div>`).join('')}<div class="row"><button class="pri" onclick="newProject()">+ New empty project</button></div><h2>This project</h2><label>Project name<input value="${E(P.name)}" oninput="P.name=this.value;save()"></label><p class="meta">${P.points.length} points · ${P.points.filter(labP).length} labelled places · ${allMedia().length} media files. All stored in this browser until exported.</p>
+ <div class="row"><button class="pri" onclick="zip(false)">Export / back up project (.zip)</button><label class="btn">Import (.zip) as a new project<input type="file" accept=".zip" hidden onchange="imp(this)"></label></div>
+ <h2>Publish</h2><p class="meta">Creates a .zip containing index.html, data.json and a media folder. Unzip it and upload the folder to a static host over HTTPS (Netlify Drop, GitHub Pages, Cloudflare Pages). Visitors get Live guide only.</p>
+ <div class="row"><button class="pri" onclick="zip(true)">Export publishable website (.zip)</button></div><div class="row"><button class="bad" onclick="clr()">Empty this project</button></div>`}
+async function zip(pub){try{if(!window.JSZip)return toast('The zip tool did not load. Connect to the internet and reload this page.');if(pub&&!P.points.some(labP))return toast('Label at least one place before publishing.');
+ toast('Preparing the AI data for the export…');await ready();await prepP();const z=new JSZip(),miss=allMedia().filter(o=>!B[o.id]),noai=allMedia().filter(o=>!o.e||o.m!==TAG).length;const dj=JSON.stringify({format:'nav2',...P});z.file('data.json',dj);z.file('data.js','window.__NAVDATA='+dj+';');let nf=0;for(const o of allMedia())if(B[o.id]){z.file(`media/${o.id}.${o.ext}`,B[o.id]);nf++}
+ if(pub){const c=document.documentElement.cloneNode(true);c.querySelector('#bundled').textContent='{"published":true}';c.querySelector('#app').innerHTML='';c.querySelector('#toast').style.display='none';z.file('index.html','<!DOCTYPE html>\n'+c.outerHTML)}
+ const a=document.createElement('a');a.href=URL.createObjectURL(await z.generateAsync({type:'blob'}));a.download=(pub?'site-':'project-')+new Date().toISOString().slice(0,10)+'.zip';a.click();toast('Exported '+nf+' photos'+(miss.length?' · '+miss.length+' photo(s) missing from this browser and left out':'')+(noai?' · '+noai+' without AI data (the site will compute it on first visit, which is slow)':' · AI data included')+'. Upload the whole folder: index.html, data.json and media/.')}catch(e){toast('Export failed: '+e.message)}}
+async function plist(){const d=await DB(),ks=(await rq(d.transaction('k').objectStore('k').getAllKeys())).filter(k=>String(k).startsWith('proj:')),o=[];for(const k of ks){const q=await rq(d.transaction('k').objectStore('k').get(k));o.push({pid:k.slice(5),name:q.name,pts:q.points.length,ph:q.points.reduce((a,p)=>a+p.imgs.length,0)})}return o}
+const resetUI=()=>{PD=ED=null;ARM=null;SEL=-1;LK='start';VT=null;LASTP=null;CH=[];V='pt'};
+async function imp(i){const f=i.files[0];i.value='';if(!f)return;try{const z=await JSZip.loadAsync(f),d=JSON.parse(await z.file('data.json').async('string'));if(d.format!=='nav2'||!Array.isArray(d.points)||!Array.isArray(d.routes))throw Error('Not a Route Builder project.');
+ if(!confirm(`Import “${d.name||'project'}” (${d.points.length} points) as a new project? Your current project is kept.`))return;await save();stopLive();
+ const np={pid:uid(),name:d.name||'Imported project',points:d.points,routes:d.routes,settings:d.settings||{th:.8}};
+ for(const p of np.points)for(const o of p.imgs){const e=z.file(`media/${o.id}.${o.ext}`);if(!e)throw Error('Missing file '+o.id+'.'+o.ext);const nid=uid()+uid();await putB(nid,new Blob([await e.async('arraybuffer')],{type:o.mime}));o.id=nid}
+ P=np;mig();resetUI();await save();PL=await plist();render();toast('Imported as a new project')}catch(e){toast('Import failed: '+e.message)}}
+async function newProject(){if(PUB)return;const nm=prompt('Name your new project:','New project');if(nm===null)return;await save();stopLive();P=blankP();P.pid=uid();P.name=nm.trim()||'New project';resetUI();await save();PL=await plist();render();toast('New empty project started. Your other projects are kept under Data → My projects.')}
+async function openProject(pid){if(PUB||pid==P.pid)return;await save();stopLive();const d=await DB(),q=await rq(d.transaction('k').objectStore('k').get('proj:'+pid));if(!q)return toast('Project not found.');P=q;mig();resetUI();await save();PL=await plist();render();toast('Opened “'+pn()+'”')}
+async function delProject(pid){const l=PL.find(x=>x.pid==pid);if(!l||!confirm(`Delete “${l.name||'Untitled'}” and all its photos? This cannot be undone.`))return;await save();const d=await DB(),cur=pid==P.pid,q=cur?P:await rq(d.transaction('k').objectStore('k').get('proj:'+pid));
+ for(const o of q.points.flatMap(p=>p.imgs))await delB(o);await rq(d.transaction('k','readwrite').objectStore('k').delete('proj:'+pid));
+ if(cur){stopLive();const rest=await plist();if(rest.length){P=await rq(d.transaction('k').objectStore('k').get('proj:'+rest[0].pid))}else{P=blankP();P.pid=uid()}mig();resetUI();await save()}
+ PL=await plist();render();toast('Project deleted.')}
+async function clr(){if(!confirm('Remove all points and photos from THIS project? Your other projects are not affected.'))return;const pid=P.pid,nm=P.name;for(const o of allMedia())await delB(o);P=blankP();P.pid=pid;P.name=nm;await save();render()}
+/* diagnostics, per-device AI data, cache */
+const DG={},CK='navcache:'+location.pathname;
+function diagHTML(){const L=[],tfo=window.tf;L.push('Page: '+location.protocol+'//'+(location.host||'(local)')+(window.isSecureContext?' · secure':' · NOT secure, camera may be blocked'));
+ L.push('Project data: '+(DG.src?'read via '+DG.src:'not read yet')+' · '+P.points.length+' places · '+allMedia().length+' photos');L.push('Photo files: '+(DG.img||(PUB?'testing…':'n/a in builder')));
+ L.push('AI engine: '+(tfo?'loaded · backend '+tfo.getBackend():'NOT loaded (needs internet)')+(MN?' · model ready':' · model NOT ready'));
+ try{if(tfo)L.push('Full-precision graphics: '+(tfo.env().getBool('WEBGL_RENDER_FLOAT32_CAPABLE')?'yes':'NO (this phone uses lower precision)'))}catch(e){}
+ L.push('This device vs saved AI data: '+(DG.dev||'not tested yet'));L.push('Saved AI data from cache: '+(DG.cache||'no'));L.push('Speed: '+(DG.ms?DG.ms+' ms per frame':'not measured yet'));
+ L.push('Recognition brain: '+(LV&&LV.B?'active · '+LV.B.pl.length+' places':'not active'));L.push('Camera: '+(DG.cam||'not started'));return L.map(x=>'<div>'+E(x)+'</div>').join('')}
+const drawDg=()=>{const e=$('#dg');if(e)e.innerHTML=diagHTML()};
+async function imgTest(){const all=allMedia(),step=Math.max(1,Math.ceil(all.length/40)),smp=all.filter((_,i)=>i%step==0);let ok=0,bad=0,first='';
+ await Promise.all(smp.map(o=>new Promise(r=>{const i=new Image();i.onload=()=>{ok++;r()};i.onerror=()=>{bad++;first=first||url(o);r()};i.src=url(o)})));
+ DG.img=ok+' of '+smp.length+' sampled loaded'+(bad?' · '+bad+' FAILED (first: '+first+')':'');if(bad)lg(bad+' photo file(s) failed to load (first: '+first+'). Check the media folder is bundled/uploaded.','er');drawDg()}
+async function devCheck(){if(!MN)return;const all=P.points.flatMap(p=>p.imgs).filter(o=>o.e&&o.m===TAG),smp=all.filter((_,i)=>i%Math.max(1,Math.floor(all.length/4))==0).slice(0,4),s=[];
+ for(const o of smp){try{const im=new Image();im.src=url(o);await im.decode();const es=await embAll(im);if(es)s.push(dot(es[0],o.e))}catch(e){}}
+ if(!s.length){DG.dev='could not test';return}const m=s.reduce((a,b)=>a+b,0)/s.length;DG.dev=(Math.round(m*1000)/10)+'% match ('+s.length+' photos)';lg('Device check: '+DG.dev,m<.97?'er':'ok',72);
+ if(m<.97){lg('This phone computes the AI data differently from the computer that made it. Re-processing your photos on this phone…','er',72);for(const p of P.points)for(const o of p.imgs)o.m=null;await prepP();DG.dev+=' → re-processed on this phone'}drawDg()}
+async function cacheLoad(){try{const d=await DB(),c=await rq(d.transaction('k').objectStore('k').get(CK));if(!c||c.n!==allMedia().length)return;let n=0;for(const p of P.points)for(const o of p.imgs){const x=c.m[o.id];if(x){o.e=x.e;o.v=x.v;o.m=TAG;n++}}DG.cache=n+' photos'}catch(e){}}
+async function cacheSave(){if(!PUB)return;try{const d=await DB(),m={};for(const p of P.points)for(const o of p.imgs)if(o.e&&o.m===TAG)m[o.id]={e:o.e,v:o.v};d.transaction('k','readwrite').objectStore('k').put({n:allMedia().length,m},CK)}catch(e){}}
+addEventListener('error',e=>lg('Error: '+(e.message||'unknown'),'er'));addEventListener('unhandledrejection',e=>lg('Error: '+((e.reason&&e.reason.message)||e.reason),'er'));
+const getJSON=async u=>{try{const r=await fetch(u);if(!r.ok)throw 0;const j=await r.json();DG.src='fetch';return j}catch(e){}
+ try{const j=await new Promise((res,rej)=>{const x=new XMLHttpRequest();x.open('GET',u);x.onload=()=>{try{res(JSON.parse(x.responseText))}catch(e){rej(e)}};x.onerror=()=>rej(0);x.send()});DG.src='XHR';return j}catch(e){}
+ const j=await new Promise((res,rej)=>{const t=document.createElement('script');t.src=u.replace(/\.json$/,'.js');t.onload=()=>window.__NAVDATA?res(window.__NAVDATA):rej(Error('data.js is empty'));t.onerror=()=>rej(Error('could not read '+u+' or data.js'));document.head.appendChild(t)});DG.src='data.js';return j};
+
+(async()=>{const b=JSON.parse($('#bundled').textContent);if(b){PUB=true;V='live';try{P=await getJSON('data.json')}catch(e){P=blankP();toast('Could not load data.json. On a web host, upload it next to index.html. In an app, make sure data.json and the media folder were bundled with index.html.')}}else{try{await load()}catch(e){P=blankP();toast('Saved data could not be loaded: '+e.message)}}mig();if(PUB){await cacheLoad();imgTest()}else{await save();try{PL=await plist()}catch(e){PL=[]}}render();ready().then(prepP)})();
+</script></body></html>
